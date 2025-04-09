@@ -8,7 +8,7 @@
 		"dev": "vinxi dev",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
 		"lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src/ --fix",
-		"build": "pnpm lint && vinxi build --preset vercel",
+		"build": "pnpm lint && vinxi build",
 		"start": "vinxi start",
 		"db-generate": "drizzle-kit generate",
 		"db-migrate": "drizzle-kit migrate",
