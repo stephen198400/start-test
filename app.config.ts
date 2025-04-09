@@ -6,7 +6,9 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
 	server: {
 		preset: 'vercel',
+		static: true,
 	},
+
 	tsr: {
 		appDirectory: 'src',
 	},
