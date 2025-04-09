@@ -1,0 +1,115 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Structure Overview (Tanstack Start, React, TypeScript)
+
+This document outlines the directory structure of the project, designed to help understand the codebase organization.
+
+```
+.
+├── src/                      # Main source code directory
+│   ├── lib/                  # Core libraries, utilities, and configurations
+│   ├── router.tsx            # Tanstack Router core configuration (file-based routing setup)
+│   ├── routes/               # Tanstack Router: Directory containing all route components
+│   ├── components/           # Reusable React components
+│   │   ├── ui/               # Shadcn/UI: Atomic UI components generated/managed by Shadcn/UI CLI
+│   │   ├── shared/           # Application-specific shared components
+│   │   └── layout/           # Components specifically for structuring page layouts
+│   ├── integrations/         # Configuration and setup for integrating third-party libraries
+│   ├── routeTree.gen.ts      # Tanstack Router: Auto-generated type-safe route tree
+│   ├── functions/            # Feature-based modules grouping related functionality
+│   │   ├── projects/         # Example expanded function module for "projects" feature
+│   │   │   ├── components/   # React components specific to the projects feature
+│   │   │   │   ├── project-card.tsx
+│   │   │   │   ├── project-list.tsx
+│   │   │   │   └── project-form.tsx
+│   │   │   ├── hooks/       # React hooks specific to the projects feature
+│   │   │   │   ├── useProjects.ts
+│   │   │   │   └── useProjectActions.ts
+│   │   │   ├── serverFn/    # Server functions for projects (Tanstack Start Server Functions)
+│   │   │   │   ├── createProject.ts
+│   │   │   │   └── deleteProject.ts
+│   │   │   ├── utils/       # Utility functions specific to projects
+│   │   │   │   └── formatProjectData.ts
+│   │   ├── auth/            # Authentication related functionality
+│   │   │   ├── components/
+│   │   │   │   ├── sign-in-form.tsx
+│   │   │   │   └── sign-up-form.tsx
+│   │   │   ├── hooks/
+│   │   │   │   └── useAuth.ts
+│   │   │   ├── api/
+│   │   │   │   └── getCurrentUser.ts
+│   │   │   └── serverFn/
+│   │   │       ├── signInUser.ts
+│   │   │       └── signUpUser.ts
+│   │   └── users/           # User management functionality
+│   │       ├── components/
+│   │       │   ├── user-profile.tsx
+│   │       │   └── user-settings.tsx
+│   │       ├── hooks/
+│   │       │   └── useUserPreferences.ts
+│   │       ├── api/
+│   │       │   ├── getUserProfile.ts
+│   │       │   └── updateUserProfile.ts
+│   │       └── serverFn/
+│   │           └── changeUserRole.ts
+│   ├── db/                   # Database-related files
+│   ├── api.ts                # API client setup
+│   ├── types/                # Global TypeScript type definitions
+│   ├── hooks/                # Global custom React Hooks
+│   │   ├── useLocalStorage.ts
+│   │   ├── useMediaQuery.ts
+│   │   └── useDarkMode.ts
+│   ├── styles/               # Global CSS styles or styling configuration
+│   ├── client.tsx            # Client-side entry point
+│   └── ssr.tsx               # Server-side rendering entry point
+├── pnpm-lock.yaml            # pnpm lockfile
+├── package.json              # Project manifest: dependencies, scripts, metadata
+├── .env                      # Environment variables (local development)
+├── drizzle.config.ts         # Drizzle ORM configuration
+├── components.json           # Shadcn/UI configuration
+├── tsconfig.json             # TypeScript compiler configuration
+├── app.config.ts             # Application-specific configuration
+└── postcss.config.ts         # PostCSS configuration
+```
+
+## Function Module Organization
+
+The `functions/` directory contains feature-based modules that group related functionality. Each module typically includes:
+
+1. **components/**: React components specific to the feature
+   - Named using kebab-case: `feature-name.tsx`
+   - Example: `project-card.tsx`, `user-profile.tsx`
+
+2. **hooks/**: Custom React hooks that encapsulate feature-specific logic
+   - Named using camelCase with `use` prefix: `useFeature.ts`
+   - Example: `useProjects.ts`, `useAuth.ts`
+
+3. **serverFn/**: Server-side functions that can be called from the client
+   - Named using action verbs: `createResource.ts`, `deleteResource.ts`
+   - Example: `createProject.ts`, `signInUser.ts`
+
+4. **utils/**: Utility functions specific to the feature
+   - Named using action verbs: `formatData.ts`, `validateInput.ts`
+   - Example: `formatProjectData.ts`
+
+
+## Recommendations for Function Placement
+
+Based on this structure:
+
+1. **React Hooks**:
+   - Place in `functions/[feature]/hooks/` for feature-specific hooks
+   - Use `use` prefix: `useProjects.ts`, `useAuth.ts`
+
+2. **Server Functions**:
+   - Place in `functions/[feature]/serverFn/` following the existing pattern
+   - Use action verb naming: `createProject.ts`, `deleteUser.ts`
+
+3. **Components**:
+   - Place in `functions/[feature]/components/` or global `components/`
+   - Use kebab-case: `project-card.tsx`, `user-profile.tsx`
+
+This organization provides a clear and consistent structure that makes it easy to locate and understand the purpose of each file in the project.
